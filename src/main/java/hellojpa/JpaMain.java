@@ -18,17 +18,17 @@ public class JpaMain {
         try {
             // 비영속
             Member member = new Member();
-            member.setId(100L);
+            member.setId(101L);
             member.setName("Hello123");
 
-            // 영속 (1차 캐시에 저장됨)
+            // 영속
+            System.out.println("=== Before ===");
             em.persist(member);
+            System.out.println("=== After ===");
 
-            // 1차 캐시에서 조회
-            Member findMember = em.find(Member.class, "100L");
-
-            // 데이터베이스에서 조회
-            Member findMember2 = em.find(Member.class, "1L");
+            Member findMember = em.find(Member.class, 101L);
+            System.out.println("findMember.id" + findMember.getId());
+            System.out.println("findMember.name" + findMember.getName());
 
             tx.commit();
         } catch (Exception e) {

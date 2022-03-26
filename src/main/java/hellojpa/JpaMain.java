@@ -16,9 +16,13 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try {
-            // 똑같은 entity를 두번 조회할때, select 두번 실행되지 않는다.
-            Member findMember1 = em.find(Member.class, 101L);
-            Member findMember2 = em.find(Member.class, 101L);
+            Member member1 = new Member(10L, "A");
+            Member member2 = new Member(20L, "B");
+
+            em.persist(member1);
+            em.persist(member2);
+
+            System.out.println("=================== line ===================");
 
             tx.commit();
         } catch (Exception e) {

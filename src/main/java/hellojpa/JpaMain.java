@@ -21,8 +21,14 @@ public class JpaMain {
             member.setId(100L);
             member.setName("Hello123");
 
-            // 영속
+            // 영속 (1차 캐시에 저장됨)
             em.persist(member);
+
+            // 1차 캐시에서 조회
+            Member findMember = em.find(Member.class, "100L");
+
+            // 데이터베이스에서 조회
+            Member findMember2 = em.find(Member.class, "1L");
 
             tx.commit();
         } catch (Exception e) {

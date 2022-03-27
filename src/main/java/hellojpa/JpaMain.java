@@ -16,13 +16,12 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try {
-            Member member1 = new Member(10L, "A");
-            Member member2 = new Member(20L, "B");
+            Member member = new Member(30L, "member30");
+            em.persist(member);
 
-            em.persist(member1);
-            em.persist(member2);
+            em.flush();
 
-            System.out.println("=================== line ===================");
+            System.out.println("============================");
 
             tx.commit();
         } catch (Exception e) {

@@ -1,9 +1,6 @@
 package hellojpa;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import java.util.List;
 
 public class JpaMain {
@@ -16,19 +13,15 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try {
-            Member member1 = new Member(40L, "member40");
-            Member member2 = new Member(50L, "member50");
-            Member member3 = new Member(60L, "member60");
+            Member member1 = new Member(70L, "member70");
+            Member member2 = new Member(80L, "member80");
+            Member member3 = new Member(90L, "member90");
             em.persist(member1);
             em.persist(member2);
             em.persist(member3);
 
-            em.flush();
-            System.out.println("============================");
-
-            Member findMember1 = em.find(Member.class, 40L);
-            Member findMember2 = em.find(Member.class, 50L);
-            Member findMember3 = em.find(Member.class, 60L);
+            TypedQuery<Member> query = em.createQuery("select m from Member m", Member.class);
+            List<Member> members = query.getResultList();
 
             tx.commit();
         } catch (Exception e) {

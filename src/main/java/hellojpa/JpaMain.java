@@ -13,23 +13,12 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try {
-            Member member1 = new Member(110L, "member110");
-            Member member2 = new Member(120L, "member120");
-            Member member3 = new Member(1300L, "member130");
-            em.persist(member1);
-            em.persist(member2);
-            em.persist(member3);
+            // 1차 캐시에 찾고 없네? - db에서 찾고 영속성 컨텍스트에 추가
+            Member member = em.find(Member.class, 140L);
+            member.setName("TEST");
 
-            em.setFlushMode(FlushModeType.COMMIT);
-            List<Member> members1 = em.createQuery("select m from Member m", Member.class)
-                    .getResultList();
-            System.out.println("FlushModeType.COMMIT result size : " + members1.size());
-
-            em.setFlushMode(FlushModeType.AUTO);
-            List<Member> members2 = em.createQuery("select m from Member m", Member.class)
-                    .getResultList();
-
-            System.out.println("FlushModeType.AUTO result size : " + members2.size());
+            // 영속 -> 준영속 jpa 가 더이상 관리하지 않음
+            em.detach(member);
 
             tx.commit();
         } catch (Exception e) {

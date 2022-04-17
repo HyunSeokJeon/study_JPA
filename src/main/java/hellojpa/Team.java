@@ -23,6 +23,10 @@ public class Team {
         this.id = id;
     }
 
+    public void addMember(Member member) {
+        member.setTeam(this);
+        members.add(member);
+    }
     public String getName() {
         return name;
     }
@@ -37,5 +41,14 @@ public class Team {
 
     public void setMembers(List<Member> members) {
         this.members = members;
+    }
+
+    @Override
+    public String toString() {
+        return "Team{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", members=" + members +
+                '}';
     }
 }

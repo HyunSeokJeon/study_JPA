@@ -1,6 +1,7 @@
 package hellojpa;
 
 import javax.persistence.*;
+import java.util.List;
 
 public class JpaMain {
 
@@ -21,14 +22,16 @@ public class JpaMain {
 
             Member member = new Member();
             member.setUsername("member1");
-            member.changeTeam(team);
             em.persist(member);
 
-            // 순수 객체 상태를 고려해서 양쪽에 값 세팅
-//            team.getMembers().add(member);
+            team.addMember(member);
 
             em.flush();
             em.clear();
+
+            Team findTeam = em.find(Team.class, team.getId());
+            List<Member> members = findTeam.getMembers();
+            System.out.println(findTeam);
 
             tx.commit();
         } catch (Exception e) {

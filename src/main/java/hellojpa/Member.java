@@ -8,7 +8,7 @@ public class Member {
 
     @Id
     @GeneratedValue
-    private Long Id;
+    private Long id;
 
     @Column(name = "USERNAME")
     private String username;
@@ -17,12 +17,16 @@ public class Member {
     @JoinColumn(name = "TEAM_ID", insertable = false, updatable = false)
     private Team team;
 
+    @OneToOne
+    @JoinColumn(name = "LOCKER_ID")
+    private Locker locker;
+
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getUsername() {

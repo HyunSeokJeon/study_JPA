@@ -9,6 +9,10 @@
         <class>hellojpa.Locker</class>
         <class>hellojpa.Product</class>
         <class>hellojpa.MemberProduct</class>
+        <class>hellojpa.Item</class>
+        <class>hellojpa.Album</class>
+        <class>hellojpa.Book</class>
+        <class>hellojpa.Movie</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
             <property name="javax.persistence.jdbc.user" value="sa"/>

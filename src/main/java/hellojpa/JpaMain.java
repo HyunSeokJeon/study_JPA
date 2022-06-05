@@ -13,17 +13,17 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try {
-            Member member = new Member();
-            member.setUsername("member1");
+            Movie movie = new Movie();
+            movie.setDirector("aaaa");
+            movie.setActor("bbb");
+            movie.setName("바람");
+            movie.setPrice(10000);
+            em.persist(movie);
 
-            em.persist(member);
+            em.flush();
+            em.clear();
 
-            Team team = new Team();
-            team.setName("teamA");
-            // team 객체에 대한 조작으로 member 테이블의 업데이트가 이루어짐 : 실무에 적합하지 않다.
-            team.getMembers().add(member);
-
-            em.persist(team);
+            em.find(Movie.class, movie.getId());
 
             tx.commit();
         } catch (Exception e) {
